@@ -2,12 +2,13 @@ from flask import Flask, render_template, request, jsonify
 import vertexai
 from vertexai.language_models import ChatModel
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
-PROJECT_ID = "tt-dev-001"  
-LOCATION = "us-central1"  
 
-vertexai.init(project=PROJECT_ID, location=LOCATION)
+
+vertexai.init(project=os.getenv("PROJECT_ID"), location=os.getenv("LOCATION"))
 
 def create_session():
     chat_model = ChatModel.from_pretrained("chat-bison@001")
